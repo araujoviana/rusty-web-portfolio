@@ -9,8 +9,6 @@ pub struct SkillGroup {
     pub items: &'static [SkillItem],
 }
 
-// ---- EDIT THESE LISTS ----
-
 pub const LANGUAGES: &[SkillItem] = &[
     ("Python", "Strong"),
     ("Rust", "Solid"),

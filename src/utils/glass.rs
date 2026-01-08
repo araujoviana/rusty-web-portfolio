@@ -1,5 +1,3 @@
-// Mobile-first: cheap. Desktop (sm+): your original heavy glass.
-
 pub const GLASS_HERO: &str = "
 relative mx-auto
 rounded-[32px]

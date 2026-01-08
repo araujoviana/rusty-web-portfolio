@@ -66,7 +66,6 @@ pub fn Contact() -> impl IntoView {
                         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                             <div class="flex items-center gap-4">
                                 <div class="shrink-0">
-                                    // PASTE YOUR SVG HERE (replace the whole <svg>...</svg>)
                                     <svg
                                         class="w-10 h-10 text-white/75"
                                         viewBox="0 0 24 24"
