@@ -1,6 +1,11 @@
 use leptos::mount::mount_to_body;
 
 mod app;
+mod components;
+mod pages;
+mod utils;
+mod wasm;
+
 use app::App;
 
 fn main() {

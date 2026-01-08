@@ -1,0 +1,117 @@
+#[derive(Clone, Copy)]
+pub struct Project {
+    pub id: &'static str,
+    pub name: &'static str,
+    pub description: &'static str,
+
+    pub language_label: &'static str,
+    pub language_svg: Option<&'static str>,
+
+    pub repo_url: &'static str,
+    pub media_src: &'static str,
+    pub media_label: &'static str,
+    pub demo_url: &'static str,
+    pub demo_label: &'static str,
+    pub cta_label: &'static str,
+}
+
+// NOTE: this file lives in src/utils/, assets are in src/assets/
+pub const RUST_SVG: &str = include_str!("../assets/rust.svg");
+pub const JAVA_SVG: &str = include_str!("../assets/java.svg");
+// pub const C_SVG: &str = include_str!("../assets/c.svg");
+pub const PYTHON_SVG: &str = include_str!("../assets/python.svg");
+pub const DJANGO_SVG: &str = include_str!("../assets/django.svg");
+
+pub const PROJECTS: &[Project] = &[
+    Project {
+        id: "obsctl",
+        name: "obsctl",
+        description: "High-performance tool for managing cloud object storage, built with a focus on reliability, speed, and efficient handling of large data workflows, including uploads, downloads, and large-scale object management.",
+        language_label: "Rust",
+        language_svg: Some(RUST_SVG),
+        repo_url: "https://github.com/araujoviana/obsctl",
+        media_src: "../assets/obsctl.webm",
+        media_label: "obsctl terminal demo",
+        demo_url: "",
+        demo_label: "Demo",
+        cta_label: "GitHub",
+    },
+    Project {
+        id: "dog",
+        name: "dog",
+        description: "Local-first AI system for retrieval-augmented generation (RAG) over personal documents and audio, combining OCR, semantic search, and conversational querying while keeping all data private and on-device.",
+        language_label: "Python",
+        language_svg: Some(PYTHON_SVG),
+        repo_url: "https://github.com/araujoviana/dog",
+        media_src: "../assets/dog.png",
+        media_label: "index page for dog",
+        demo_url: "",
+        demo_label: "Demo",
+        cta_label: "GitHub",
+    },
+    Project {
+        id: "an-cli",
+        name: "an-cli",
+        description: "Numerical analysis toolkit implementing root finding, numerical differentiation, integration, interpolation, and least-squares regression, built for reproducible and scriptable computation workflows.",
+        language_label: "Python",
+        language_svg: Some(PYTHON_SVG),
+        repo_url: "https://github.com/araujoviana/an-cli",
+        media_src: "../assets/an-cli.webm",
+        media_label: "an-cli terminal demo",
+        demo_url: "",
+        demo_label: "Demo",
+        cta_label: "GitHub",
+    },
+    Project {
+        id: "file-manager",
+        name: "file-manager",
+        description: "Lightweight graphical file manager focused on filesystem navigation, metadata inspection, and system-level file handling in a minimal desktop interface.",
+        language_label: "Python",
+        language_svg: Some(PYTHON_SVG),
+        repo_url: "https://github.com/araujoviana/file-manager",
+        media_src: "../assets/file-manager.webm",
+        media_label: "placeholder: screenshot",
+        demo_url: "",
+        demo_label: "Demo",
+        cta_label: "GitHub",
+    },
+    Project {
+        id: "assembly-interpreter",
+        name: "Assembly Interpreter",
+        description: "Interpreter for a custom assembly-inspired language, built around a REPL-driven workflow with registers, memory buffers, control flow instructions, and program load/save support.",
+        language_label: "Java",
+        language_svg: Some(JAVA_SVG),
+        repo_url: "https://github.com/araujoviana/proj-assembly-estrutura-dados",
+        media_src: "../assets/assembly.webm",
+        media_label: "assembly interpreter demo",
+        demo_url: "",
+        demo_label: "Demo",
+        cta_label: "GitHub",
+    },
+    Project {
+        id: "copperknight",
+        name: "CopperKnight",
+        description: "Full-stack web platform for creating and sharing digital artwork directly in the browser, featuring a custom drawing canvas, persistent storage, user accounts, and social discovery backed by a SQL database-driven backend.",
+        language_label: "Django",
+        language_svg: Some(DJANGO_SVG),
+        repo_url: "https://github.com/araujoviana/copperknight",
+        media_src: "../assets/copperknight.webm",
+        media_label: "placeholder: screenshots",
+        demo_url: "",
+        demo_label: "Demo",
+        cta_label: "GitHub",
+    },
+    Project {
+        id: "more",
+        name: "See more projects",
+        description: "Browse my full repository list on GitHub!",
+        language_label: "",
+        language_svg: None,
+        repo_url: "https://github.com/araujoviana?tab=repositories",
+        media_src: "../assets/gh.png",
+        media_label: "placeholder: github.png",
+        demo_url: "",
+        demo_label: "",
+        cta_label: "Open GitHub",
+    },
+];
