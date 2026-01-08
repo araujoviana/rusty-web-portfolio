@@ -1,4 +1,6 @@
+use leptos::html;
 use leptos::prelude::*;
+use wasm_bindgen::JsCast;
 
 use crate::utils::projects_data::{PROJECTS, Project};
 
@@ -28,35 +30,35 @@ fn is_video(src: &str) -> bool {
 #[component]
 pub fn Projects() -> impl IntoView {
     view! {
-            <section id="projects" class=" [content-visibility:auto] [contain-intrinsic-size:1px_900px] px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20">
-                <div class="mx-auto max-w-6xl">
-                    <div class="mb-10 flex items-end justify-between gap-6">
-                        <div class="space-y-2">
-                            <h2 class="text-3xl sm:text-4xl font-semibold tracking-tight text-white/90">
-                                "Projects"
-                            </h2>
-                            <p class="text-white/60 max-w-prose leading-relaxed">
-    "Selected projects exploring systems, tooling, and performance-driven engineering."
-                            </p>
-                        </div>
-                        <div class="hidden sm:block text-xs font-mono text-white/40">
-                            "$ ls projects/"
-                        </div>
+        <section id="projects" class="  px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20">
+            <div class="mx-auto max-w-6xl">
+                <div class="mb-10 flex items-end justify-between gap-6">
+                    <div class="space-y-2">
+                        <h2 class="text-3xl sm:text-4xl font-semibold tracking-tight text-white/90">
+                            "Projects"
+                        </h2>
+                        <p class="text-white/60 max-w-prose leading-relaxed">
+                            "Selected projects exploring systems, tooling, and performance-driven engineering."
+                        </p>
                     </div>
+                    <div class="hidden sm:block text-xs font-mono text-white/40">
+                        "$ ls projects/"
+                    </div>
+                </div>
 
-                    <div class="space-y-6">
-                        <For
-                            // IMPORTANT: iterate Projects by value (Copy) so key gets &Project (NOT &&Project)
-                            each=move || PROJECTS.iter().copied()
-                            key=|p: &Project| p.id
-                            children=move |p: Project| {
-                                let has_media = !p.media_src.is_empty();
-                                let has_lang = !p.language_label.is_empty();
-                                let has_demo = !p.demo_url.is_empty();
-                                let has_icon = p.language_svg.is_some();
+                <div class="space-y-6">
+                    <For
+                        // IMPORTANT: iterate Projects by value (Copy) so key gets &Project (NOT &&Project)
+                        each=move || PROJECTS.iter().copied()
+                        key=|p: &Project| p.id
+                        children=move |p: Project| {
+                            let has_media = !p.media_src.is_empty();
+                            let has_lang = !p.language_label.is_empty();
+                            let has_demo = !p.demo_url.is_empty();
+                            let has_icon = p.language_svg.is_some();
 
-                                view! {
-                                    <article class="
+                            view! {
+                                <article class="
                                 relative overflow-hidden rounded-3xl
                                 border border-white/15
                                 bg-gradient-to-br from-white/14 via-white/8 to-white/4
@@ -64,69 +66,65 @@ pub fn Projects() -> impl IntoView {
                                 shadow-[0_20px_55px_-25px_rgba(0,0,0,0.55)]
                                 px-6 py-6
                                 ">
-                                        <div class="relative z-10 grid grid-cols-1 md:grid-cols-5 gap-6 items-center">
+                                    <div class="relative z-10 grid grid-cols-1 md:grid-cols-5 gap-6 items-center">
 
-                                            <div class="md:col-span-2">
-                                                <div class="
+                                        <div class="md:col-span-2">
+                                            <div class="
                                             relative overflow-hidden rounded-2xl
                                             border border-white/10
                                             bg-black/40
                                             shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]
                                             ">
-                                                    <Show
-                                                        when=move || has_media
-                                                        fallback=move || {
-                                                            view! {
-                                                                <div class="h-full w-full flex items-center justify-center px-6 text-sm text-white/40">
-                                                                    <span class="font-mono">{p.media_label}</span>
-                                                                </div>
-                                                            }
+                                                <Show
+                                                    when=move || has_media
+                                                    fallback=move || {
+                                                        view! {
+                                                            <div class="h-full w-full flex items-center justify-center px-6 text-sm text-white/40">
+                                                                <span class="font-mono">{p.media_label}</span>
+                                                            </div>
                                                         }
-                                                    >
-                                                        <div class="
+                                                    }
+                                                >
+                                                    <div class="
                                                     relative overflow-hidden rounded-2xl
                                                     border border-white/10
                                                     bg-black/40
                                                     shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]
                                                     ">
-                                                            <Show
-                                                                when=move || is_video(p.media_src)
-                                                                fallback=move || {
-                                                                    view! {
-                                                                        <img
-                                                                            class="w-full h-auto object-contain rounded-2xl"
-                                                                            src=p.media_src
-                                                                            alt=p.name
-                                                                            loading="lazy"
-                                                                        />
-                                                                    }
+                                                        <Show
+                                                            when=move || is_video(p.media_src)
+                                                            fallback=move || {
+                                                                view! {
+                                                                    <img
+                                                                        class="w-full h-auto object-contain rounded-2xl"
+                                                                        src=p.media_src
+                                                                        alt=p.name
+                                                                        loading="lazy"
+                                                                    />
                                                                 }
-                                                            >
-                                                                <video
-                                                                    class="w-full h-auto object-contain rounded-2xl"
-                                                                    src=p.media_src
-                                                                    autoplay
-                                                                    loop
-                                                                    muted
-                                                                    playsinline
-                                                                    preload="metadata"
-                                                                />
-                                                            </Show>
-                                                        </div>
-                                                    </Show>
+                                                            }
+                                                        >
+                                                            <AutoVideo
+                                                                src=p.media_src
+                                                                class="w-full h-auto object-contain rounded-2xl"
+                                                            />
 
-                                                </div>
+                                                        </Show>
+                                                    </div>
+                                                </Show>
+
                                             </div>
+                                        </div>
 
-                                            <div class="md:col-span-3 flex flex-col">
-                                                <div class="flex items-start justify-between gap-4">
-                                                    <div class="space-y-1">
-                                                        <h3 class="text-xl sm:text-2xl font-semibold text-white/90 tracking-tight">
-                                                            {p.name}
-                                                        </h3>
+                                        <div class="md:col-span-3 flex flex-col">
+                                            <div class="flex items-start justify-between gap-4">
+                                                <div class="space-y-1">
+                                                    <h3 class="text-xl sm:text-2xl font-semibold text-white/90 tracking-tight">
+                                                        {p.name}
+                                                    </h3>
 
-                                                        <Show when=move || has_lang fallback=|| ()>
-                                                            <span class="
+                                                    <Show when=move || has_lang fallback=|| ()>
+                                                        <span class="
                                                         inline-flex items-center gap-2
                                                         rounded-full px-3 py-1 text-xs
                                                         border border-white/10
@@ -134,34 +132,34 @@ pub fn Projects() -> impl IntoView {
                                                         text-white/70
                                                         backdrop-blur
                                                         ">
-                                                                <Show when=move || has_icon fallback=|| ()>
-                                                                    <img
-                                                                        class="w-4 h-4 shrink-0"
-                                                                        src=svg_data_url(p.language_svg.unwrap())
-                                                                        alt=""
-                                                                        aria-hidden="true"
-                                                                    />
-                                                                </Show>
-                                                                <span>{p.language_label}</span>
-                                                            </span>
-                                                        </Show>
-                                                    </div>
-
-                                                    <span class="text-xs font-mono text-white/35">
-                                                        {format!("#{}", p.id)}
-                                                    </span>
+                                                            <Show when=move || has_icon fallback=|| ()>
+                                                                <img
+                                                                    class="w-4 h-4 shrink-0"
+                                                                    src=svg_data_url(p.language_svg.unwrap())
+                                                                    alt=""
+                                                                    aria-hidden="true"
+                                                                />
+                                                            </Show>
+                                                            <span>{p.language_label}</span>
+                                                        </span>
+                                                    </Show>
                                                 </div>
 
-                                                <p class="mt-4 text-white/65 leading-relaxed">
-                                                    {p.description}
-                                                </p>
+                                                <span class="text-xs font-mono text-white/35">
+                                                    {format!("#{}", p.id)}
+                                                </span>
+                                            </div>
 
-                                                <div class="mt-5 flex flex-wrap items-center gap-3">
-                                                    <a
-                                                        href=p.repo_url
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        class="
+                                            <p class="mt-4 text-white/65 leading-relaxed">
+                                                {p.description}
+                                            </p>
+
+                                            <div class="mt-5 flex flex-wrap items-center gap-3">
+                                                <a
+                                                    href=p.repo_url
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    class="
                                                     inline-flex items-center justify-center gap-2
                                                     rounded-xl px-4 py-2 text-sm font-medium
                                                     bg-white/10 text-white/85
@@ -170,16 +168,16 @@ pub fn Projects() -> impl IntoView {
                                                     transition duration-300
                                                     hover:bg-white/15 hover:border-white/25 hover:text-white
                                                     "
-                                                    >
-                                                        {p.cta_label}
-                                                    </a>
+                                                >
+                                                    {p.cta_label}
+                                                </a>
 
-                                                    <Show when=move || has_demo fallback=|| ()>
-                                                        <a
-                                                            href=p.demo_url
-                                                            target="_blank"
-                                                            rel="noopener noreferrer"
-                                                            class="
+                                                <Show when=move || has_demo fallback=|| ()>
+                                                    <a
+                                                        href=p.demo_url
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        class="
                                                         inline-flex items-center justify-center gap-2
                                                         rounded-xl px-4 py-2 text-sm font-medium
                                                         text-white/70
@@ -189,19 +187,65 @@ pub fn Projects() -> impl IntoView {
                                                         transition duration-300
                                                         hover:bg-white/10 hover:border-white/20 hover:text-white
                                                         "
-                                                        >
-                                                            {p.demo_label}
-                                                        </a>
-                                                    </Show>
-                                                </div>
+                                                    >
+                                                        {p.demo_label}
+                                                    </a>
+                                                </Show>
                                             </div>
                                         </div>
-                                    </article>
-                                }
+                                    </div>
+                                </article>
                             }
-                        />
-                    </div>
+                        }
+                    />
                 </div>
-            </section>
+            </div>
+        </section>
+    }
+}
+
+#[component]
+fn AutoVideo(src: &'static str, class: &'static str) -> impl IntoView {
+    let vref = NodeRef::<html::Video>::new();
+
+    let try_play = move || {
+        if let Some(v) = vref.get() {
+            let v: web_sys::HtmlVideoElement = v.into();
+            v.set_muted(true); // IMPORTANT: property, not just attribute
+            let _ = v.play(); // Chromium may block; ignore error
         }
+    };
+
+    Effect::new({
+        let try_play = try_play.clone();
+        move || try_play()
+    });
+
+    Effect::new({
+        let try_play = try_play.clone();
+        move || {
+            let doc = web_sys::window().unwrap().document().unwrap();
+            let cb = wasm_bindgen::closure::Closure::<dyn FnMut(web_sys::Event)>::wrap(Box::new(
+                move |_| try_play(),
+            ));
+            let _ =
+                doc.add_event_listener_with_callback("pointerdown", cb.as_ref().unchecked_ref());
+            cb.forget();
+        }
+    });
+
+    view! {
+        <video
+            node_ref=vref
+            class=class
+            prop:muted=true
+            prop:autoplay=true
+            prop:loop=true
+            playsinline
+            preload="metadata"
+            on:loadedmetadata=move |_| try_play()
+        >
+            <source src=src type="video/webm" />
+        </video>
+    }
 }

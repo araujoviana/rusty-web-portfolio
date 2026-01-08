@@ -46,7 +46,10 @@ pub fn Contact() -> impl IntoView {
     };
 
     view! {
-        <section id="contact" class="[content-visibility:auto] [contain-intrinsic-size:1px_900px] px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20 pb-20">
+        <section
+            id="contact"
+            class="[content-visibility:auto] [contain-intrinsic-size:1px_900px] px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20 pb-20"
+        >
             <div class="mx-auto max-w-6xl">
                 <div class="mb-10 flex items-end justify-between gap-6">
                     <div class="space-y-2">
@@ -54,7 +57,7 @@ pub fn Contact() -> impl IntoView {
                             "Contact"
                         </h2>
                         <p class="text-white/60 max-w-prose leading-relaxed">
-    "Ways to get in touch."
+                            "Ways to get in touch."
                         </p>
                     </div>
                     <div class="hidden sm:block text-xs font-mono text-white/40">"$ links"</div>

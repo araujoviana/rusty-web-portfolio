@@ -71,7 +71,10 @@ pub fn About() -> impl IntoView {
     });
 
     view! {
-        <section id="about" class="px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20 [content-visibility:auto] [contain-intrinsic-size:1px_900px]">
+        <section
+            id="about"
+            class="px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20 [content-visibility:auto] [contain-intrinsic-size:1px_900px]"
+        >
             <div class="mx-auto max-w-6xl">
                 <div class="grid gap-10 lg:grid-cols-2 items-start">
 
@@ -81,13 +84,9 @@ pub fn About() -> impl IntoView {
                             "About"
                         </h2>
 
-                        <p class="text-white/70 leading-relaxed max-w-prose">
-                        {ABOUT_P1}
-                        </p>
+                        <p class="text-white/70 leading-relaxed max-w-prose">{ABOUT_P1}</p>
 
-                        <p class="text-white/60 leading-relaxed max-w-prose">
-                        {ABOUT_P2}
-                        </p>
+                        <p class="text-white/60 leading-relaxed max-w-prose">{ABOUT_P2}</p>
                     </div>
 
                     // RIGHT: Terminal
